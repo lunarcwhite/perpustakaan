@@ -9,7 +9,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\Admin\KategoriController;
-use App\Http\Controllers\Admin\SaranaPrasaranaController;
+use App\Http\Controllers\Admin\BukuController;
 use App\Http\Controllers\LandingPageController;
 
 /*
@@ -55,7 +55,7 @@ Route::middleware('revalidate')->group(function () {
                     Route::get('', 'index')->name('');
                 });
                 Route::resource('kategori', KategoriController::class)->except('create');
-                Route::resource('sarana_prasarana', SaranaPrasaranaController::class)->except('create','show');
+                Route::resource('buku', BukuController::class)->except('create','show');
             });
         });
         Route::controller(UserSettingsController::class)->group(function () {

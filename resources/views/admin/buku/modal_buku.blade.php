@@ -1,4 +1,4 @@
-<div class="modal fade text-left" id="modalSaranaPrasarana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+<div class="modal fade text-left" id="modalBuku" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -9,28 +9,15 @@
                     aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('dashboard.kategori.store') }}" method="post" id="formSaranaPrasarana" enctype="multipart/form-data">
+                <form action="" method="post" id="formBuku" enctype="multipart/form-data">
                     @csrf
                     <div id="update">
 
                     </div>
                     <div class="form-group mt-1">
-                        <label for="email">Nama Sarana & Prasarana: </label>
-                        <input id="nama_sarana_prasarana" type="text" name="nama_sarana_prasarana"
-                            placeholder="Nama Sarana & Prasarana" class="form-control" />
-                    </div>
-                    <div class="form-group mt-1">
-                        <label for="email">Jumlah: </label>
-                        <input id="jumlah" type="text" name="jumlah"
-                            placeholder="Jumlah" class="form-control" />
-                    </div>
-                    <div class="form-group mt-1">
-                        <label for="email">Tipe Sarana Atau Prasarana: </label>
-                        <select name="tipe" id="tipe" class="form-control">
-                            <option value=""> --> Pilih Sarana/Prasarana <--- </option>
-                            <option value="Sarana">Sarana</option>
-                            <option value="Prasarana">Prasarana</option>
-                        </select>
+                        <label for="email">Nama Buku: </label>
+                        <input id="nama_buku" type="text" name="nama_buku"
+                            placeholder="Nama Buku" class="form-control" />
                     </div>
                     <div class="form-group mt-1">
                         <label for="email">Kategori: </label>
@@ -42,10 +29,10 @@
                         </select>
                     </div>
                     <div class="form-group mt-1">
-                        <label for="">Photo</label>
+                        <label for="">Sampul: </label>
                         <div id="" class="gambar mb-2">
                         </div>
-                        <input type="file" class="form-control image-input file" name="photo"
+                        <input type="file" class="form-control image-input file" accept="image/*" name="sampul_buku"
                             placeholder="Photo">
                     </div>
                     <div class="image-preview mt-3">

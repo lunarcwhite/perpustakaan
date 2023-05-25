@@ -3,24 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\SaranaPrasarana;
+use App\Models\Buku;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 use Carbon\Carbon;
 use Storage;
 
-class SaranaPrasaranaController extends Controller
+class BukuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    function getSaranaPrasarana()
+    function getBuku()
     {
-        return SaranaPrasarana::with('kategori')->orderBy('nama_sarana_prasarana', 'ASC')->get();
+        return Buku::with('kategori')->orderBy('nama_buku', 'ASC')->get();
     }
-    function getOneSaranaPrasarana($id)
+    function getOneBuku($id)
     {
-        return SaranaPrasarana::with('kategori')->where('id', $id)->first();
+        return Buku::with('kategori')->where('id', $id)->first();
     }
     function getKategori()
     {
@@ -29,9 +29,9 @@ class SaranaPrasaranaController extends Controller
 
     public function index()
     {
-        $data['sarana_prasaranas'] = $this->getSaranaPrasarana();
+        $data['bukus'] = $this->getBuku();
         $data['kategoris'] = $this->getKategori();
-        return view('admin.sarana_prasarana.index')->with($data);
+        return view('admin.buku.index')->with($data);
     }
 
     /**
@@ -48,26 +48,25 @@ class SaranaPrasaranaController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'nama_sarana_prasarana' => 'required|unique:sarana_prasaranas,nama_sarana_prasarana',
-            'jumlah' => 'required|integer',
+            'nama_buku' => 'required|unique:bukus,nama_buku',
             'kategori_id' => 'required',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg'
+            'sampul_buku' => 'image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         try {
-            $foto = $request->photo;
+            $foto = $request->sampul_buku;
     
-            if ($request->hasFile('photo')) {
+            if ($request->hasFile('sampul_buku')) {
                 $extension = $foto->extension();
-                $filename = 'photo_' . $request->nama_sarana_prasarana .'_'.$request->tipe .'_' . Carbon::now() . '.' . $extension;
-                $foto->storeAs('public/images/'.$request->tipe, $filename);
+                $filename = 'sampul_buku_' . $request->nama_buku .'_' . Carbon::now() . '.' . $extension;
+                $foto->storeAs('public/images/buku/', $filename);
                 $fotoDb = $filename;
             } else {
                 $fotoDb = null;
             }
             $data = $request->all();
-            $data['photo'] = $fotoDb;
-            SaranaPrasarana::create($data);
+            $data['sampul_buku'] = $fotoDb;
+            Buku::create($data);
             $notification = [
                 'alert-type' => 'success',
                 'message' => 'Berhasil Menambah Data',
@@ -76,7 +75,6 @@ class SaranaPrasaranaController extends Controller
                 ->back()
                 ->with($notification);
         } catch (\Throwable $th) {
-            
             $notification = [
                 'alert-type' => 'error',
                 'message' => 'Gagal. Coba Ulangi',
@@ -90,7 +88,7 @@ class SaranaPrasaranaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SaranaPrasarana $saranaPrasarana)
+    public function show(Buku $Buku)
     {
         //
     }
@@ -98,41 +96,40 @@ class SaranaPrasaranaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SaranaPrasarana $saranaPrasarana)
+    public function edit(Buku $Buku)
     {
-        return $saranaPrasarana;
+        return $Buku;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SaranaPrasarana $saranaPrasarana)
+    public function update(Request $request, Buku $Buku)
     {
         $validate = $request->validate([
-            'nama_sarana_prasarana' => 'required',
-            'jumlah' => 'required|integer',
+            'nama_buku' => 'required',
             'kategori_id' => 'required',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg'
+            'sampul_buku' => 'image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         try {
             $foto = $request->photo;
     
-            if ($request->hasFile('photo')) {
-                if($saranaPrasarana->photo !== null){
-                    Storage::delete('public/images/'.$saranaPrasarana->tipe.'/'.$saranaPrasarana->photo);
+            if ($request->hasFile('sampul_buku')) {
+                if($Buku->sampul_buku !== null){
+                    Storage::delete('public/images/buku/'.$Buku->sampul_buku);
                 }
                 $extension = $foto->extension();
-                $filename = 'photo_' . $request->nama_sarana_prasarana .'_'.$request->tipe .'_' . Carbon::now() . '.' . $extension;
-                $foto->storeAs('public/images/'.$request->tipe, $filename);
+                $filename = 'sampul_buku_' . $request->nama_buku .'_' . Carbon::now() . '.' . $extension;
+                $foto->storeAs('public/images/buku/', $filename);
                 $fotoDb = $filename;
                 
             } else {
                 $fotoDb = null;
             }
             $data = $request->all();
-            $data['photo'] = $fotoDb;
-            $saranaPrasarana->update($data);
+            $data['sampul_buku'] = $fotoDb;
+            $Buku->update($data);
             $notification = [
                 'alert-type' => 'success',
                 'message' => 'Berhasil Memperbarui Data',
@@ -156,13 +153,14 @@ class SaranaPrasaranaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SaranaPrasarana $saranaPrasarana)
+    public function destroy(Buku $Buku)
     {
         try {
-            if($saranaPrasarana->photo !== null){
-                Storage::delete('public/images/'.$saranaPrasarana->tipe.'/'.$saranaPrasarana->photo);
+                
+            if($Buku->sampul_buku !== null){
+                Storage::delete('public/images/buku/'.$Buku->sampul_buku);
             }
-            $saranaPrasarana->delete();
+            $Buku->delete();
             $notification = [
                 'alert-type' => 'success',
                 'message' => 'Berhasil Menghapus Data',
