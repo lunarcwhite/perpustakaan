@@ -1,81 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
+    <title>Gentelella Alela! | </title>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link href="{{asset('img/logo/logo.png')}}" rel="icon">
-  <title>RuangAdmin - Login</title>
-  <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-  <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
-  <link href="{{asset('css/ruang-admin.min.css')}}" rel="stylesheet">
+    {{-- <!-- Animate.css -->
+    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet"> --}}
+    <!-- Bootstrap -->
+    <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="{{asset('vendors/nprogress/nprogress.css')}}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet">
+  </head>
 
-</head>
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
 
-<body class="bg-gradient-login">
-  <!-- Login Content -->
-  <div class="container-login">
-    <div class="row justify-content-center">
-      <div class="col-xl-6 col-lg-12 col-md-9">
-        <div class="card shadow-sm my-5">
-          <div class="card-body p-0">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="login-form">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Login</h1>
-                  </div>
-                  <form action="{{ route('authenticate') }}" method="post" id="authenticate">
-                    @csrf
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="username" id="exampleInputEmail" aria-describedby="emailHelp"
-                        placeholder="Enter Username or Email Address">
-                    </div>
-                    <div class="form-group">
-                      <input type="password" name="password" class="form-control" id="exampleInputPassword" placeholder="Password">
-                    </div>
-                    {{-- <div class="form-group">
-                      <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember
-                          Me</label>
-                      </div>
-                    </div> --}}
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-block">Login</button>
-                    </div>
-                    <hr>
-                    {{-- <a href="index.html" class="btn btn-google btn-block">
-                      <i class="fab fa-google fa-fw"></i> Login with Google
-                    </a>
-                    <a href="index.html" class="btn btn-facebook btn-block">
-                      <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                    </a> --}}
-                  </form>
-                  <hr>
-                  <div class="text-center">
-                    <a class="font-weight-bold small" href="{{route('register')}}">Create an Account!</a>
-                  </div>
-                  <div class="text-center">
-                    <a class="font-bold" href="{{route('forgotPassword')}}">Forgot password?</a>.
-                  </div>
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form action="{{route('authenticate')}}" method="POST">
+              @csrf
+              <h1>Login Form</h1>
+              <div>
+                <input type="text" class="form-control" name="username" placeholder="Username" required="" />
+              </div>
+              <div>
+                <input type="password" class="form-control" name="password" placeholder="Password" required="" />
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <br/>
+                {{-- <a class="reset_pass" href="#">Lost your password?</a> --}}
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                {{-- <p class="change_link">New to site?
+                  <a href="#signup" class="to_register"> Create Account </a>
+                </p> --}}
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
                 </div>
               </div>
-            </div>
-          </div>
+            </form>
+          </section>
         </div>
+
+        {{-- <div id="register" class="animate form registration_form">
+          <section class="login_content">
+            <form>
+              <h1>Create Account</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Username" required="" />
+              </div>
+              <div>
+                <input type="email" class="form-control" placeholder="Email" required="" />
+              </div>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <div>
+                <a class="btn btn-default submit" href="index.html">Submit</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">Already a member ?
+                  <a href="#signin" class="to_register"> Log in </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div> --}}
       </div>
     </div>
-  </div>
-  <!-- Login Content -->
-  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-  <script src="{{asset('js/ruang-admin.min.js')}}"></script>
+
 @include('layouts.scripts.sweetalert')
 </body>
 </html>

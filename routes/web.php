@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\SaranaPrasaranaController;
+use App\Http\Controllers\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,9 @@ use App\Http\Controllers\Admin\KategoriController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::middleware('revalidate')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::controller(LoginController::class)->group(function () {
@@ -53,6 +55,7 @@ Route::middleware('revalidate')->group(function () {
                     Route::get('', 'index')->name('');
                 });
                 Route::resource('kategori', KategoriController::class)->except('create');
+                Route::resource('sarana_prasarana', SaranaPrasaranaController::class)->except('create','show');
             });
         });
         Route::controller(UserSettingsController::class)->group(function () {
@@ -62,5 +65,8 @@ Route::middleware('revalidate')->group(function () {
                 });
             });
         });
+    });
+    Route::controller(LandingPageController::class)->group(function () {
+        Route::get('/', 'index')->name('');
     });
 });

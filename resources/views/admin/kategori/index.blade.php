@@ -56,14 +56,14 @@
             </div>
         </div>
     </div>
-@include('admin.kategori.modalKategori')
+@include('admin.kategori.modal_kategori')
 @stop
 @push('js')
     <script>
-        function editKategori(id, modal) {
+        function editKategori(id_kategori, idModal) {
             $.ajax({
                 type: "get",
-                url: `{{ url('dashboard/kategori/${id}/edit') }}`,
+                url: `{{ url('dashboard/kategori/${id_kategori}/edit') }}`,
                 dataType: 'json',
                 success: function(res) {
                     $("#nama_kategori").val(res.nama_kategori);
@@ -74,7 +74,7 @@
                     );
                     document.getElementById('formKategori').action =
                     `{{ url('dashboard/kategori/${res.id}') }}`;
-                    $(modal).modal('show');
+                    $(idModal).modal('show');
                 }
             });
         }

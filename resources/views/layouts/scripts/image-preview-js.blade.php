@@ -8,9 +8,8 @@
             $('.image-preview').append(
                 `
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-                    <button type="button" class="close position-relative" aria-label="Close">
-                        <span aria-hidden="true" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger">&times;</span>
-                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger btn-close buang"
+                    aria-label="Close"><span aria-hidden="true"><i class="fas fa-trash"></i></span></button>
                 </div> 
                     <img src="#" id="preview" class="img-thumbnail position-relative">
                 `
@@ -20,7 +19,7 @@
         // read the image file as a data URL.
         reader.readAsDataURL(this.files[0]);
     });
-    $(document).on("click", ".close", function () {
+    $(document).on("click", ".buang", function () {
         $('.image-preview').empty();
         $(".file").val("");
     });

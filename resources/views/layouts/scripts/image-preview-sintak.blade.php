@@ -1,10 +1,10 @@
-<div class="form-group boxed">
-                        <label for="file">Photo Barang: </label>
-                        <input class="form-control file image-input browse file" type="file" name="photo_gambar"
-                            placeholder="Ambil Photo">
-                        <div class="image-preview pt-3">
-
-                        </div>
-                    </div>
-                    <div id="gambar-barang">
-                    </div>
+<div class="form-group mt-1">
+    <label for="">Photo</label>
+    <div id="gambar_sarana_prasarana" class="mb-2">
+        <input type="file" class="form-control image-input file" name="photo"
+            placeholder="Photo">
+    </div>
+    <div class="image-preview mt-3">
+        <span>Preview : </span>
+    </div>
+</div>

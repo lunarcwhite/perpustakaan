@@ -9,4 +9,9 @@ class Kategori extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function sarana()
+    {
+        return $this->hasMany(SaranaPrasarana::class, 'kategori_id', 'id');
+    }
 }
