@@ -75,7 +75,7 @@
                         $(".gambar").append(`Belum Mengupload Gambar`);
                     } else {
                         $(".gambar").append(
-                            `<img src="{{ url('storage/images/buku/${res.sampul_buku}') }}" class="img-fluid" alt="" srcset="">`
+                            `<img src="{{ url('storage/img/sampul_buku/${res.sampul_buku}') }}" class="img-fluid" alt="" srcset="">`
                             );
                     }
                     $(`#labelModal`).text('Edit Data Buku');

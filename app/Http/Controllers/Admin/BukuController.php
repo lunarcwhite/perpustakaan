@@ -58,8 +58,8 @@ class BukuController extends Controller
     
             if ($request->hasFile('sampul_buku')) {
                 $extension = $foto->extension();
-                $filename = 'sampul_buku_' . $request->nama_buku .'_' . Carbon::now() . '.' . $extension;
-                $foto->storeAs('public/images/buku/', $filename);
+                $filename = 'sampul_buku_'.$request->nama_buku .'_' . Carbon::now() . '.' . $extension;
+                $foto->storeAs('public/img/sampul_buku/', $filename);
                 $fotoDb = $filename;
             } else {
                 $fotoDb = null;
@@ -113,15 +113,15 @@ class BukuController extends Controller
         ]);
 
         try {
-            $foto = $request->photo;
+            $foto = $request->sampul_buku;
     
             if ($request->hasFile('sampul_buku')) {
                 if($Buku->sampul_buku !== null){
-                    Storage::delete('public/images/buku/'.$Buku->sampul_buku);
+                    Storage::delete('public/img/sampul_buku/'.$Buku->sampul_buku);
                 }
                 $extension = $foto->extension();
                 $filename = 'sampul_buku_' . $request->nama_buku .'_' . Carbon::now() . '.' . $extension;
-                $foto->storeAs('public/images/buku/', $filename);
+                $foto->storeAs('public/img/sampul_buku/', $filename);
                 $fotoDb = $filename;
                 
             } else {
@@ -158,7 +158,7 @@ class BukuController extends Controller
         try {
                 
             if($Buku->sampul_buku !== null){
-                Storage::delete('public/images/buku/'.$Buku->sampul_buku);
+                Storage::delete('public/img/sampul_buku/'.$Buku->sampul_buku);
             }
             $Buku->delete();
             $notification = [
