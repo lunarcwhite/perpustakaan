@@ -22,11 +22,12 @@
                 </div>
 
                 <div class="table-responsive p-3">
-                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <table class="table align-items-center table-flush table-hover" id="dataTable">
                         <thead class="thead-light">
                             <th>No</th>
                             <th>Nama Buku</th>
                             <th>Kategori</th>
+                            <th>Tempat Buku</th>
                             <TH>Aksi</TH>
                         </thead>
                         <tbody>
@@ -35,9 +36,10 @@
                                     <td>{{ $no + 1 }}</td>
                                     <td>{{ $buku->nama_buku }}</td>
                                     <td>{{$buku->kategori->nama_kategori}}</td>
+                                    <td>{{$buku->tempat_buku->nama_tempat_buku}}</td>
                                     <td>
                                         <form action="{{ route('dashboard.buku.destroy', $buku->id) }}"
-                                            id="formDeleteSarana" method="post">
+                                            id="" method="post">
                                             @csrf
                                             @method('delete')
                                             <a href="#"
@@ -71,6 +73,7 @@
                 success: function(res) {
                     $("#nama_buku").val(res.nama_buku);
                     $(`#kategori option[value="${res.kategori_id}"]`).attr("selected", "selected").attr('class', 'kapilih');
+                    $(`#tempat_buku option[value="${res.tempat_buku_id}"]`).attr("selected", "selected").attr('class', 'kapilih');
                     if (res.sampul_buku === null) {
                         $(".gambar").append(`Belum Mengupload Gambar`);
                     } else {

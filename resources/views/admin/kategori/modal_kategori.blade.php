@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-light-secondary" type="button" data-dismiss="modal">Batal</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
                     <button type="button" id="btn-submit" onclick="formConfirmation('Simpan Data?','#formKategori')"
                     class="btn btn-primary ms-1">
                     Simpan

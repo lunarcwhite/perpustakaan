@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Buku;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
+use App\Models\TempatBuku;
 use Carbon\Carbon;
 use Storage;
 
@@ -26,11 +27,16 @@ class BukuController extends Controller
     {
         return Kategori::all();
     }
+    function getTempatBuku()
+    {
+        return TempatBuku::all();
+    }
 
     public function index()
     {
         $data['bukus'] = $this->getBuku();
         $data['kategoris'] = $this->getKategori();
+        $data['tempat_bukus'] = $this->getTempatBuku();
         return view('admin.buku.index')->with($data);
     }
 
@@ -75,13 +81,10 @@ class BukuController extends Controller
                 ->back()
                 ->with($notification);
         } catch (\Throwable $th) {
-            $notification = [
-                'alert-type' => 'error',
-                'message' => 'Gagal. Coba Ulangi',
-            ];
             return redirect()
-                ->back()
-                ->with($notification);
+            ->back()
+            ->withErrors($th->getMessage())
+            ->withInput();
         }
     }
 
@@ -138,15 +141,11 @@ class BukuController extends Controller
                 ->back()
                 ->with($notification);
         } catch (\Throwable $th) {
-            dd( $th);
             
-            $notification = [
-                'alert-type' => 'error',
-                'message' => 'Gagal. Coba Ulangi',
-            ];
             return redirect()
-                ->back()
-                ->with($notification);
+            ->back()
+            ->withErrors($th->getMessage())
+            ->withInput();
         }
     }
 
@@ -169,7 +168,10 @@ class BukuController extends Controller
                 ->back()
                 ->with($notification);
         } catch (\Throwable $th) {
-            dd($th);
+            return redirect()
+            ->back()
+            ->withErrors($th->getMessage())
+            ->withInput();
         }
     }
 }

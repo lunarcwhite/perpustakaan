@@ -1,7 +1,6 @@
 @extends('layouts.admin.master')
 @section('pageTitle')
-    Data Sarana & Prasarana
-
+    Data Buku
 @stop
 @section('pageLink')
     Kategori {{$kategori->nama_kategori}}
@@ -19,18 +18,16 @@
                 </div>
 
                 <div class="table-responsive p-3">
-                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <table class="table align-items-center table-flush table-hover" id="tableData">
                         <thead class="thead-light">
                             <th>No</th>
-                            <th>Nama Sarana & Prasarana</th>
-                            <th>Tipe</th>
+                            <th>Nama Buku</th>
                         </thead>
                         <tbody>
-                            @foreach ($kategori->sarana as $no => $sarana)
+                            @foreach ($kategori->buku as $no => $buku)
                                 <tr>
                                     <td>{{ $no + 1 }}</td>
-                                    <td>{{ $sarana->nama_sarana_prasarana }}</td>
-                                    <td>{{ $sarana->tipe}}</td>
+                                    <td>{{ $buku->nama_buku }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

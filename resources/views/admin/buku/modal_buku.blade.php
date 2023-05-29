@@ -29,6 +29,15 @@
                         </select>
                     </div>
                     <div class="form-group mt-1">
+                        <label for="email">Tempat Buku: </label>
+                        <select name="tempat_buku_id" id="tempat_buku" class="form-control">
+                            <option value=""> --> Pilih Tempat Buku <--- </option>
+                                    @foreach ($tempat_bukus as $tempat_buku)
+                            <option value="{{ $tempat_buku->id }}">{{ $tempat_buku->nama_tempat_buku }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mt-1">
                         <label for="">Sampul: </label>
                         <div id="" class="gambar mb-2">
                         </div>
@@ -39,7 +48,7 @@
                         <span>Preview : </span>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-light-secondary" type="button" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
                         <button type="button" id="btn-submit"
                             onclick="formConfirmation('Simpan Data?')"
                             class="btn btn-primary ms-1">

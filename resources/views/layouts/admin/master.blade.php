@@ -149,6 +149,7 @@
     @include('layouts.scripts.sweetalert')
     @stack('js')
     @include('layouts.scripts.image-preview-js')
+    @include('layouts.scripts.dataTable')
     <script>
         function clearInput(formId, label = "", action = "") {
             document.getElementById(formId).reset();

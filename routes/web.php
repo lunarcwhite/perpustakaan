@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\TempatBukuController;
 use App\Http\Controllers\Admin\BukuController;
 use App\Http\Controllers\LandingPageController;
 
@@ -56,6 +57,7 @@ Route::middleware('revalidate')->group(function () {
                 });
                 Route::resource('kategori', KategoriController::class)->except('create');
                 Route::resource('buku', BukuController::class)->except('create','show');
+                Route::resource('tempat_buku', TempatBukuController::class)->except('create');
             });
         });
         Route::controller(UserSettingsController::class)->group(function () {

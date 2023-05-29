@@ -14,4 +14,8 @@ class Buku extends Model
     {
         return $this->belongsTo(Kategori::class, 'kategori_id', 'id');
     }
+    public function tempat_buku()
+    {
+        return $this->belongsTo(TempatBuku::class, 'tempat_buku_id');
+    }
 }
