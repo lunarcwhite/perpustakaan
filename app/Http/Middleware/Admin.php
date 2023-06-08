@@ -17,7 +17,7 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
             if(auth()->user()->role_id != 1){
-                return redirect()->back();
+                return redirect()->route('landing');
             }
         
         return $next($request);

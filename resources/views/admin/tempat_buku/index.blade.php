@@ -39,14 +39,14 @@
                                             id="" method="post">
                                             @csrf
                                             @method('delete')
-                                            <a href="#"
+                                            <a href="{{route('dashboard.tempat_buku.show', $tempat_buku->id)}}"
                                                 class="btn btn-info">Lihat</a>
                                             <button type="button" class="btn btn-warning"
                                                 onclick="editTempatBuku('{{ $tempat_buku->id }}','#modalTempatBuku')">
                                                 Edit
                                             </button>
                                             <button type="button" class="btn btn-danger"
-                                                onclick="formConfirmation('Hapus Data {{ $tempat_buku->nama_tempat_buku }}')">Hapus</button>
+                                                onclick="formConfirmation('Hapus Tempat Buku {{ $tempat_buku->nama_tempat_buku }}')">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -61,13 +61,13 @@
 @stop
 @push('js')
 <script>
-        function editBuku(idData, idModal) {
+        function editTempatBuku(idData, idModal) {
             $.ajax({
                 type: "get",
                 url: `{{ url('dashboard/tempat_buku/${idData}/edit') }}`,
                 dataType: 'json',
                 success: function(res) {
-                    $("#tempat_buku").val(res.tempat_buku);
+                    $("#tempat_buku").val(res.nama_tempat_buku);
                     $(`#labelModal`).text('Edit Data Tempat Buku');
                     $(`#btn-submit`).text('Update');
                     $('#update').append(

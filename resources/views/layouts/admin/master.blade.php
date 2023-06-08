@@ -125,8 +125,8 @@
                             <p>Are you sure you want to logout?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                        <button class="btn btn-primary">Logout</button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-danger">Logout</button>
                     </div>
                 </div>
             </div>
@@ -164,22 +164,6 @@
             $(".kapilih").removeAttr('selected');
         }
 
-        function formConfirmation(message) {
-            var form = event.target.form;
-            Swal.fire({
-                title: message,
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            })
-        }
     </script>
 </body>
 

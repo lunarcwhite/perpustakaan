@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('kategori_id')->unsigned();
             $table->bigInteger('tempat_buku_id')->unsigned();
             $table->string('sampul_buku')->nullable();
-            $table->char('status_buku',1)->default('1');
+            $table->char('status_tersedia',1)->default('1');
             $table->timestamps();
             $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('tempat_buku_id')->references('id')->on('tempat_bukus')->onDelete('restrict')->onUpdate('cascade');

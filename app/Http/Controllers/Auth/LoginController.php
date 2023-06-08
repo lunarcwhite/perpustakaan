@@ -37,6 +37,11 @@ class LoginController extends Controller
                         'message' => 'Login Berhasil',
                         'alert-type' => 'success',
                     ];
+                    if(Auth::user()->role_id == 2){
+                        return redirect()
+                        ->route('landing')
+                        ->with($notification);
+                    }
                     return redirect()
                         ->intended('dashboard')
                         ->with($notification);

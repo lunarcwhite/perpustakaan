@@ -44,10 +44,13 @@ class TempatBukuController extends Controller
             ->back()
             ->with($notification);
         } catch (\Throwable $th) {
+            $notification = [
+                'alert-type' => 'error',
+                'message' => $th->getMessage()
+            ];
             return redirect()
             ->back()
-            ->withErrors($th->getMessage())
-            ->withInput();
+            ->with($notification);
         }
     }
 
@@ -56,7 +59,8 @@ class TempatBukuController extends Controller
      */
     public function show(TempatBuku $tempatBuku)
     {
-        //
+        $data['tempat_buku'] = TempatBuku::where('id', $tempatBuku->id)->first();
+        return view('admin.tempat_buku.show')->with($data);
     }
 
     /**
@@ -64,7 +68,7 @@ class TempatBukuController extends Controller
      */
     public function edit(TempatBuku $tempatBuku)
     {
-        //
+        return $tempatBuku;
     }
 
     /**
@@ -72,7 +76,28 @@ class TempatBukuController extends Controller
      */
     public function update(Request $request, TempatBuku $tempatBuku)
     {
-        //
+        $validate = $request->validate([
+            'nama_tempat_buku' => 'required'
+        ]);
+        $data = $request->only('nama_tempat_buku');
+        try {
+            TempatBuku::where('id',$tempatBuku->id)->update($data);
+            $notification = [
+                'alert-type' => 'success',
+                'message' => 'Tempat Buku Berhasil Diperbarui'
+            ];
+        } catch (\Throwable $th) {
+            $notification = [
+                'alert-type' => 'error',
+                'message' => $th->getMessage()
+            ];
+            return redirect()
+            ->back()
+            ->with($notification);
+        }
+        return redirect()
+        ->back()
+        ->with($notification);
     }
 
     /**
@@ -80,6 +105,23 @@ class TempatBukuController extends Controller
      */
     public function destroy(TempatBuku $tempatBuku)
     {
-        //
+        try {
+            $tempatBuku->where('id', $tempatBuku->id)->delete();
+            $notification = [
+                'alert-type' => 'success',
+                'message' => 'Tempat Buku Berhasil Dihapus'
+            ];
+            return redirect()
+            ->back()
+            ->with($notification);
+        } catch (\Throwable $th) {
+            $notification = [
+                'alert-type' => 'error',
+                'message' => $th->getMessage()
+            ];
+            return redirect()
+            ->back()
+            ->with($notification);
+        }
     }
 }

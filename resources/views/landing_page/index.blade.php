@@ -58,7 +58,7 @@
                             <h1 class="header-title display-4 header text-center">RECENT BLOGPOST</h1>
                         </div>
                         <div class="row">
-                            @foreach ($saranas as $item)
+                            @foreach ($bukus as $item)
                                 <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
                                     <div class="card border-100 h-100 shadow">
                                         <div class="card-body p-4 h-100">
@@ -75,11 +75,20 @@
                                                 class="d-flex justify-content-between mt-3 border-bottom border-100 py-2">
                                                 <span
                                                     class="badge bg-soft-info rounded-1 text-info fw-normal p-2">{{ $item->kategori->nama_kategori }}</span>
-                                                <p class="mb-0 text-500">Status</p>
+                                                <p class="mb-0 text-500">{!! $item->status_tersedia == 1 ? 'Tersedia' : 'Dipinjam'!!}</p>
                                             </div>
                                             <h3 class="fw-normal fs-lg-1 fs-xxl-2 lh-sm mt-3">
-                                                {{ $item->nama_sarana_prasarana }}</h3><a
-                                                class="text-secondary stretched-link">Pinjam</a>
+                                                {{ $item->nama_buku }}</h3>
+                                            @if (Route::has('login'))
+                                                @auth
+                                                    <button type="button" class="btn-sm btn-rounded btn-primary text-dark"
+                                                        onclick="document.getElementById('buku_id').value ='{{ $item->id }}'"
+                                                        data-toggle="modal" data-target="#modalPinjam">Pinjam</button>
+                                                @else
+                                                    <button type="button" class="btn-sm btn-rounded btn-primary text-dark"
+                                                        data-toggle="modal" data-target="#modalLogin">Pinjam</button>
+                                                @endauth
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +99,10 @@
             </div>
             <!-- end of .container-->
 
+
+          
         </section>
+
         <!-- <section> close ============================-->
         <!-- ============================================-->
     </main>
@@ -98,27 +110,21 @@
     <!--    End of Main Content-->
     <!-- ===============================================-->
 
-
-
-
-    <!-- ===============================================-->
-    <!--    JavaScripts-->
-    <!-- ===============================================-->
-    <script src="{{ asset('landing_page/vendors/popper/popper.min.js') }}"></script>
-    <script src="{{ asset('landing_page/vendors/bootstrap/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('landing_page/vendors/anchorjs/anchor.min.js') }}"></script>
-    <script src="{{ asset('landing_page/vendors/is/is.min.js') }}"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="{{ asset('landing_page/vendors/fontawesome/all.min.js') }}"></script>
-    <script src="{{ asset('landing_page/vendors/swiper/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('landing_page/vendors/fontawesome/all.min.js') }}"></script>
-    <script src="{{ asset('landing_page/vendors/lodash/lodash.min.js') }}"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="{{ 'landing_page/js/theme.js' }}"></script>
-
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Rubik:wght@300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous">
+    </script>
+    @include('layouts.scripts.sweetalert')
+    @include('landing_page.modal_login')
+    @include('landing_page.modal_pinjam')
 </body>
 
 </html>

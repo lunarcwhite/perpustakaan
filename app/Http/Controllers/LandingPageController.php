@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SaranaPrasarana;
+use App\Models\Buku;
 
 class LandingPageController extends Controller
 {
-    function getSaranaPrasarana()
+    function getBuku()
     {
-        return SaranaPrasarana::with('kategori')->get();
+        return Buku::with('kategori')->get();
     }
     public function index()
     {
-        $data['saranas'] = $this->getSaranaPrasarana();
+        $data['bukus'] = $this->getBuku();
         return view('landing_page.index')->with($data);
     }
 }
