@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use DB;
+use App\Models\User;
 
 class UsersSeeder extends Seeder
 {
@@ -29,6 +30,16 @@ class UsersSeeder extends Seeder
             ]
         ];
         DB::table('users')->insert($data);
+
+        for ($i=0; $i < 20; $i++) { 
+            $data = 'user-'.$i +1;
+            User::create([
+                'username' => $data,
+                'email' => $data.'@mail.com',
+                "password" => bcrypt("gbghfd65#2w4512345sdghgh^$^"),
+                "role_id" => 2
+            ]);
+        }
 
     }
 }

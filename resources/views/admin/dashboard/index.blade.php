@@ -13,7 +13,7 @@
         <div class="card-body">
           <div class="row align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">Jmlah Kategori</div>
+              <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Kategori</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">{{$kategoris->count()}}</div>
             </div>
             <div class="col-auto">

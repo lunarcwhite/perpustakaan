@@ -18,4 +18,8 @@ class Buku extends Model
     {
         return $this->belongsTo(TempatBuku::class, 'tempat_buku_id');
     }
+    public function peminjaman()
+    {
+        return $this->hasOne(Peminjaman::class, 'buku_id');
+    }
 }

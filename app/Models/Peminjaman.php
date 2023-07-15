@@ -12,9 +12,9 @@ class Peminjaman extends Model
     protected $table = 'peminjamans';
     protected $guarded = [];
     
-    public function user()
+    public function anggota()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Anggota::class, 'anggota_id');
     }
 
     public function buku()

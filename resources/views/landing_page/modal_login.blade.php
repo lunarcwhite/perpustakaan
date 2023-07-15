@@ -3,9 +3,9 @@ aria-labelledby="myModalLabel33" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title" id="labelModal">Login Untuk Meminjam
+            <h4 class="modal-title" id="labelModal">Login
             </h4>
-            <button type="button" class="btn btn-outline-danger btn-close" data-dismiss="modal"
+            <button type="button" class="btn btn-outline-danger btn-close" data-bs-dismiss="modal"
                 aria-label="Close"><span aria-hidden="true"></span></button>
         </div>
         <form action="{{ route('authenticate') }}" method="post">
@@ -22,9 +22,9 @@ aria-labelledby="myModalLabel33" aria-hidden="true">
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn-sm btn-rounded btn-danger"
-                    data-dismiss="modal">Close</button>
-                <button type="submit" class="btn-sm btn-rounded btn-primary">Login</button>
+                <button type="button" class="btn btn-sm btn-rounded btn-danger"
+                    data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-sm btn-rounded btn-primary">Login</button>
             </div>
         </form>
     </div>

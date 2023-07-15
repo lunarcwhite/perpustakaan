@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 @section('pageTitle')
-    Data Buku
+    Data Buku Kategori {{$kategori->nama_kategori}}
 @stop
 @section('pageLink')
     Kategori {{$kategori->nama_kategori}}

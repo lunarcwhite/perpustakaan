@@ -20,7 +20,7 @@ class LogoutController extends Controller
             'alert-type' => 'success',
         ];
         return redirect()
-            ->route('login')
+            ->route('landing')
             ->with($notification);
     }
 }

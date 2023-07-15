@@ -1,19 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\UserSettingsController;
+use App\Http\Controllers\User\UserSettingsController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\BukuController;
 use App\Http\Controllers\Admin\TempatBukuController;
-use App\Http\Controllers\Admin\RekapanPeminjamanController;
+use App\Http\Controllers\Admin\RekapanController;
+use App\Http\Controllers\Admin\TahunAjaranController;
+use App\Http\Controllers\Admin\JurusanController;
+use App\Http\Controllers\Admin\KelolaAnggotaController;
+use App\Http\Controllers\Admin\DendaController;
 use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\Admin\KelolaPeminjamanController;
+use App\Http\Controllers\User\PeminjamanController;
+use App\Http\Controllers\User\RiwayatController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -60,18 +68,26 @@ Route::middleware('revalidate')->group(function () {
                 Route::middleware('admin')->group(function () {
                     Route::resource('kategori', KategoriController::class)->except('create');
                     Route::resource('buku', BukuController::class)->except('create', 'show');
-                    Route::resource('tempat_buku', TempatBukuController::class)->except('create');
-                    Route::controller(PeminjamanController::class)->group(function () {
-                        Route::get('/pinjam/pending', 'pending')->name('peminjaman.pending');
-                        Route::get('/pinjam/ditolak', 'ditolak')->name('peminjaman.ditolak');
-                        Route::get('/pinjam/berlangsung', 'berlangsung')->name('peminjaman.berlangsung');
-                        Route::patch('/pinjam/konfirmasi', 'update')->name('peminjaman.persetujuan');
-                        Route::post('/pinjam/selesai/{id}', 'selesai')->name('peminjaman.selesai');
-                        Route::delete('/pinjam/hapus/{id}', 'destroy')->name('peminjaman.hapus');
+                    Route::resource('tahunAjaran', TahunAjaranController::class)->except('create', 'show', 'destroy');
+                    Route::resource('jurusan', JurusanController::class)->except('create', 'show', 'destroy');
+                    Route::resource('anggota', KelolaAnggotaController::class)->except('create');
+                    Route::controller(KelolaAnggotaController::class)->group(function () {
+                        Route::post('/anggota/import', 'import')->name('anggota.import');
                     });
-                    Route::controller(RekapanPeminjamanController::class)->group(function () {
-                        Route::get('/rekapan', 'index')->name('rekapan.index');
-                        Route::post('/rekapan/print', 'print')->name('rekapan.print');
+                    Route::resource('denda', DendaController::class)->only('index', 'update', 'store');
+                    Route::controller(DendaController::class)->group(function () {
+                        Route::post('/denda/bayar', 'bayar')->name('denda.bayar');
+                    });
+                    Route::resource('tempat_buku', TempatBukuController::class)->except('create');
+                    Route::controller(KelolaPeminjamanController::class)->group(function () {
+                        Route::get('/peminjaman', 'index')->name('peminjaman.index');
+                        Route::get('/peminjaman/{id}', 'show')->name('peminjaman.show');
+                        Route::post('/peminjaman/selesai', 'selesai')->name('peminjaman.selesai');
+                    });
+                    Route::controller(RekapanController::class)->group(function () {
+                        Route::get('/rekapan_peminjaman_buku', 'peminjaman_buku')->name('rekapan.peminjaman_buku');
+                        Route::get('/riwayat_pembayaran_denda', 'pembayaran_denda')->name('rekapan.pembayaran_denda');
+                        Route::post('/print/rekapan_peminjaman_buku', 'print_peminjaman')->name('rekapan.print.peminjaman_buku');
                     });
                 });
             });
@@ -86,6 +102,11 @@ Route::middleware('revalidate')->group(function () {
         Route::middleware('user')->group(function () {
             Route::controller(PeminjamanController::class)->group(function () {
                 Route::post('/pinjam/store', 'store')->name('pinjam.store');
+            });
+            Route::controller(RiwayatController::class)->group(function () {
+                Route::get('/riwayat/peminjaman', 'peminjaman')->name('riwayat.peminjaman');
+                Route::get('/riwayat/peminjaman_aktif', 'peminjaman_aktif')->name('riwayat.peminjaman_aktif');
+                Route::get('/riwayat/pembayaran_denda', 'pembayaran_denda')->name('riwayat.pembayaran_denda');
             });
         });
     });

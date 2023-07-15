@@ -56,7 +56,7 @@
         @endphp
         Swal.fire({
             title: 'Error',
-            html: "{!! $message !!}",
+            html: `{!! $message !!}`,
             icon: 'error',
         })
     @endif
