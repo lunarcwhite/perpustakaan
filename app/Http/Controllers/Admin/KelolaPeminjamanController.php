@@ -67,6 +67,9 @@ class KelolaPeminjamanController extends Controller
             Buku::where('id', $data_pinjam->buku_id)->update([
                 'status_tersedia' => 1
             ]);
+            Anggota::where('id', $data_pinjam->anggota_id)->update([
+                'status_peminjaman' => 0
+            ]);
             Peminjaman::where('id', $id_peminjaman)->delete();
         } catch (\Throwable $th) {
             return redirect()

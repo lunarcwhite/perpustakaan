@@ -112,12 +112,12 @@
                                         <br />
                                         <p class="badge bg-primary"><i class="fas fa-tags"></i>
                                             {{ $item->kategori->nama_kategori }}</p>
-                                        @if ($item->status_tersedia == 1)
-                                            <p class="card-text badge bg-success"> Tersedia</p>
+                                        @if ($item->status_tersedia == 0)
+                                        <p class="card-text badge bg-danger"> Dipinjam</p>
+                                        <h6 class="card-text">Tanggal Berakhir Peminjaman
+                                            {{ $item->peminjaman->tanggal_pengembalian }}</h6>
                                         @else
-                                            <p class="card-text badge bg-danger"> Dipinjam</p>
-                                            <h6 class="card-text">Tanggal Berakhir Peminjaman
-                                                {{ $item->peminjaman->tanggal_pengembalian }}</h6>
+                                            <p class="card-text badge bg-success"> Tersedia</p>
                                         @endif
                                     </div>
                                     <div class="card-footer">

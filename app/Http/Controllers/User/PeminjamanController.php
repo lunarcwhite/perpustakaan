@@ -61,11 +61,16 @@ class PeminjamanController extends Controller
             return redirect()
             ->back()
             ->withErrors('Buku Sedang Dipinjam Oleh ' . $peminjam);
+        }elseif($anggota->status_peminjaman == 1){
+            return redirect()
+            ->back()
+            ->withErrors('Anda masih memiliki peminjaman yang aktif.');
         }
         try {
             Buku::where('id', $id_buku)->update([
                 'status_tersedia' => 0
             ]);
+            Anggota::where('user_id', $id_user)->update(['status_peminjaman' => 1]);
             $peminjaman = new Peminjaman;
             $peminjaman::create($data);
         } catch (\Throwable $th) {
